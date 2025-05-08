@@ -1,0 +1,434 @@
+/* 
+  +Zaldo Custom Styles
+  Project_2025 Landing Page
+*/
+
+:root {
+  --primary-color: #1D426A;
+  --primary-dark: #15314f;
+  --primary-light: #2c5585;
+  --secondary-color: #333333;
+  --light-gray: #f8f9fa;
+  --dark-gray: #6c757d;
+  --white: #ffffff;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--secondary-color);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-xl {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+}
+
+.divider {
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  border-color: var(--primary-color);
+}
+
+/* Logo Styles - Corregidos para mejor visualización */
+.logo-img {
+  height: 100px; /* Aumentado de 40px a 60px para mejor visualización */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logo-footer {
+  height: 70px; /* Aumentado de 30px a 50px */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.isotipo-hero {
+  height: 120px; /* Aumentado de 100px a 120px */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.isotipo-cta {
+  height: 100px; /* Aumentado de 80px a 100px */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.isotipo-survey {
+  height: 100px; /* Aumentado de 80px a 100px */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Solución adicional para mostrar correctamente las imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Para asegurar que las imágenes con fondo transparente se vean correctamente */
+.hero img, .cta img {
+  background-color: transparent !important;
+}
+
+/* Navigation */
+#mainNav {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: var(--white);
+  transition: background-color 0.2s ease;
+}
+
+#mainNav .navbar-brand {
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  color: var(--secondary-color);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover,
+#mainNav .navbar-nav .nav-item .nav-link:active {
+  color: var(--primary-color);
+}
+
+#mainNav .navbar-nav .nav-item .cta-small {
+  background-color: var(--primary-color);
+  color: var(--white) !important;
+  border-radius: 25px;
+  padding: 0.5rem 1.25rem;
+  margin-left: 0.5rem;
+}
+
+#mainNav .navbar-nav .nav-item .cta-small:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/hero-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  height: 100vh;
+  min-height: 40rem;
+  padding-top: 8rem;
+  margin-bottom: 25px;
+}
+
+.app-screenshot {
+  transform: perspective(800px) rotateY(-15deg);
+  transition: transform 1s ease;
+}
+
+.app-screenshot:hover {
+  transform: perspective(800px) rotateY(0);
+}
+
+/* Features Section */
+.feature-box {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  transition: var(--transition);
+  margin-bottom: 25px;
+}
+
+.feature-box:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--box-shadow);
+}
+
+.feature-box i {
+  color: var(--primary-color);
+}
+
+
+
+.app-showcase-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.app-showcase-image {
+  transition: transform 0.5s ease;
+}
+
+.app-showcase-image:hover {
+  transform: translateY(-10px);
+}
+
+/* Benefits Cards */
+.benefit-card {
+  transition: var(--transition);
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  height: 100%;
+  margin-bottom: 25px;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Espaciado para sección de beneficios */
+#benefits {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 25px;
+}
+
+/* Espaciado para títulos de sección */
+.section-heading {
+  margin-bottom: 30px;
+}
+
+/* Testimonials */
+.testimonial-card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  height: 100%;
+  transition: var(--transition);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-stars {
+  color: #FFD700;
+}
+
+/* FAQ Section */
+#faq {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 25px;
+}
+
+.accordion-item {
+  margin-bottom: 15px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--primary-light);
+  color: var(--secondary-color);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(29, 66, 106, 0.25);
+}
+
+.accordion-button {
+  padding: 1.25rem;
+  font-weight: 500;
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: var(--light-gray);
+}
+
+/* Call to Action Section */
+#cta {
+  padding: 5rem 0;
+  background-color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+  padding-top: 3rem;
+}
+
+.social-icons a {
+  color: var(--dark-gray);
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  color: var(--primary-color);
+}
+
+/* Survey Page Styles */
+.survey-header {
+  padding-top: 8rem;
+}
+
+.survey-card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  margin-bottom: 20px; /* Espacio entre el iframe y el contenido */
+
+}
+
+/* Google Forms iframe styling */
+.survey-card iframe {
+  border: 0;
+  height: 100%;
+  width: 100%;
+  min-height: 800px;
+  padding: 25px;
+}
+
+/* Responsive height for iframe */
+@media (max-width: 768px) {
+  .survey-card iframe {
+    min-height: 1200px; /* Mayor altura para móviles */
+  }
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .hero {
+    height: auto;
+    padding-bottom: 5rem;
+  }
+  
+  #mainNav .navbar-nav .nav-item .cta-small {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  
+  .feature-box {
+    margin-bottom: 2rem;
+  }
+  
+  .logo-img {
+    height: 50px; /* Ajustado para pantallas medianas */
+  }
+  
+  .isotipo-hero,
+  .isotipo-cta,
+  .isotipo-survey {
+    height: 80px; /* Ajustado para pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .app-showcase-content {
+    margin-bottom: 3rem;
+  }
+  
+  .thank-you-content {
+    padding: 2rem;
+  }
+  
+  .logo-img {
+    height: 45px; /* Ajustado para pantallas pequeñas */
+  }
+  
+  .logo-footer {
+    height: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-xl {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .survey-card {
+    padding: 1rem;
+  }
+  
+  .isotipo-hero,
+  .isotipo-cta,
+  .isotipo-survey {
+    height: 70px; /* Ajustado para pantallas muy pequeñas */
+  }
+}

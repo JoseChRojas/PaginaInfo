@@ -169,19 +169,63 @@ img {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  height: 95vh;
-  min-height: 40rem;
-  padding-top: 8rem;
   margin-bottom: 25px;
+  padding-top: 120px; /* Aumentado para evitar el solapamiento con la navbar */
+  padding-bottom: 60px; /* Asegurar suficiente espacio en la parte inferior */
+  overflow: visible; /* Cambiado de hidden a visible para permitir que la imagen sea visible completamente */
+}
+
+/* Contenedor de contenido héroe mejorado */
+.hero-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Asegura que los botones siempre sean visibles */
+.hero-buttons {
+  margin-bottom: 30px;
+}
+
+/* Demo container para mantener la imagen dentro del hero */
+.demo-container {
+  position: relative;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Espacio adicional en la parte inferior */
+  width: 85%; /* Ajustado para un ancho específico */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .app-screenshot {
   transform: perspective(800px) rotateY(-15deg);
   transition: transform 1s ease;
+  width: 80%; /* Cambiado de max-width a width para forzar un tamaño específico */
+  height: auto;
+  max-height: 100vh; /* Limitando altura máxima al 80% de la altura visible */
+  border-radius: 1.5rem; /* Aumentado el radio del borde para todas las imágenes de mockup */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .app-screenshot:hover {
   transform: perspective(800px) rotateY(0);
+}
+
+/* App Showcase Images */
+.app-showcase-image {
+  transition: transform 0.5s ease;
+  border-radius: 1.5rem; /* Aseguramos que todas las imágenes de showcase tengan bordes redondeados */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.app-showcase-image:hover {
+  transform: translateY(-10px);
 }
 
 /* Features Section */
@@ -200,8 +244,6 @@ img {
 .feature-box i {
   color: var(--primary-color);
 }
-
-
 
 .app-showcase-content h2 {
   font-size: 2.2rem;
@@ -226,14 +268,6 @@ img {
 /* Asegurando que todos los iconos dentro de icon-circle sean blancos */
 .icon-circle i {
   color: var(--white);
-}
-
-.app-showcase-image {
-  transition: transform 0.5s ease;
-}
-
-.app-showcase-image:hover {
-  transform: translateY(-10px);
 }
 
 /* Benefits Cards */
@@ -417,13 +451,34 @@ footer {
     left: 10%;
     right: 10%;
   }
+  
+  .app-screenshot {
+    transform: perspective(600px) rotateY(-10deg); /* Ángulo menos pronunciado en móviles */
+    width: 90%;
+  }
+  
+  .app-screenshot:hover {
+    transform: perspective(600px) rotateY(0); /* Asegurar que el hover funcione en móviles también */
+  }
+}
+
+/* Optimizaciones para móviles */
+.mobile-hero-content {
+  padding: 2rem 1rem;
+}
+
+.mobile-hero-image {
+  margin: 1rem auto 2rem;
+  max-width: 85%;
+  padding: 0;
 }
 
 /* Media Queries */
 @media (max-width: 992px) {
   .hero {
-    height: auto;
-    padding-bottom: 5rem;
+    min-height: auto;
+    padding-top: 90px;
+    padding-bottom: 3rem;
   }
   
   #mainNav .navbar-nav .nav-item .cta-small {
@@ -444,48 +499,232 @@ footer {
   .isotipo-survey {
     height: 80px; /* Ajustado para pantallas medianas */
   }
+  
+  .demo-container {
+    height: auto;
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 92%;
+  }
+  
+  .app-screenshot {
+    width: 85%;
+    max-height: none;
+    margin: 0 auto;
+    transform: perspective(800px) rotateY(-10deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .app-screenshot:hover {
+    transform: perspective(800px) rotateY(0);
+  }
+  
+  .hero-content {
+    padding: 0;
+  }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding-top: 85px;
+    text-align: center;
+  }
+  
   h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
   
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+  
+  .isotipo-hero {
+    height: 100px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-content {
+    padding: 0 10px;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .hero-buttons .btn {
+    margin-bottom: 0.8rem;
+    margin-left: 0 !important;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .demo-container {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .app-screenshot {
+    width: 80%;
+    transform: perspective(600px) rotateY(-8deg);
+    border-radius: 1rem;
+  }
+  
+  .app-screenshot:hover {
+    transform: perspective(600px) rotateY(0);
+  }
+  
+  .feature-box {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature-box i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .app-showcase-image {
+    width: 85%;
+    margin: 0 auto;
   }
   
   .app-showcase-content {
-    margin-bottom: 3rem;
+    text-align: center;
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
   }
   
-  .thank-you-content {
-    padding: 2rem;
+  .app-showcase-content h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
   }
   
-  .logo-img {
-    height: 45px; /* Ajustado para pantallas pequeñas */
+  .icon-circle {
+    margin: 0 auto;
+    margin-right: 10px;
   }
   
-  .logo-footer {
-    height: 40px;
+  .d-flex.mb-3 {
+    text-align: left;
+    margin-bottom: 1.2rem !important;
+  }
+  
+  .accordion-button {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .accordion-body {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  #cta {
+    padding: 3rem 0;
+  }
+  
+  .isotipo-cta {
+    height: 80px;
+  }
+  
+  footer .social-icons {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  footer .social-icons a {
+    font-size: 1.3rem;
+    margin: 0 0.8rem;
   }
 }
 
 @media (max-width: 576px) {
+  .hero {
+    padding-top: 80px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .isotipo-hero {
+    height: 80px;
+  }
+  
+  .hero-buttons {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .hero-buttons .btn-xl {
+    display: block;
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 12px;
+  }
+  
+  .app-screenshot {
+    width: 90%;
+    transform: perspective(400px) rotateY(-5deg);
+  }
+  
+  .app-screenshot:hover {
+    transform: perspective(400px) rotateY(0);
+  }
+  
+  .feature-box {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .app-showcase-content .col-md-6 {
+    padding: 0 5px;
+  }
+  
+  .page-section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  
+  footer {
+    padding-top: 2rem;
+  }
+  
+  footer .logo-footer {
+    height: 35px;
+  }
+}
+
+@media (max-width: 375px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  .isotipo-hero {
+    height: 70px;
+  }
+  
+  .app-screenshot {
+    width: 95%;
+  }
+  
   .btn-xl {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .survey-card {
-    padding: 1rem;
-  }
-  
-  .isotipo-hero,
-  .isotipo-cta,
-  .isotipo-survey {
-    height: 70px; /* Ajustado para pantallas muy pequeñas */
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
   }
 }
 

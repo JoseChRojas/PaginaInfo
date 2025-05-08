@@ -216,7 +216,16 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color);
+  color: var(--white); /* Cambiado para que el color por defecto sea blanco */
+  min-width: 40px; /* Asegura que el ancho mínimo sea igual al ancho */
+  box-sizing: border-box; /* Asegura que el padding no afecte las dimensiones */
+  padding: 0; /* Elimina cualquier padding que podría afectar la forma */
+  aspect-ratio: 1/1; /* Fuerza la relación de aspecto 1:1 para navegadores modernos */
+}
+
+/* Asegurando que todos los iconos dentro de icon-circle sean blancos */
+.icon-circle i {
+  color: var(--white);
 }
 
 .app-showcase-image {
@@ -295,7 +304,7 @@ img {
 
 .accordion-button:not(.collapsed) {
   background-color: var(--primary-light);
-  color: var(--secondary-color);
+  color: var(--white); /* Cambiado de --secondary-color a --white */
 }
 
 .accordion-button:focus {
@@ -360,6 +369,53 @@ footer {
 @media (max-width: 768px) {
   .survey-card iframe {
     min-height: 1200px; /* Mayor altura para móviles */
+  }
+}
+
+/* Secciones alternadas */
+.bg-light-alt {
+  background-color: #f0f4f8; /* Un tono ligeramente diferente para distinguirlo */
+}
+
+/* Secciones alternadas con separación natural */
+.bg-light-subtle {
+  background-color: #f5f8fa; /* Tono muy sutil para distinguirlo */
+}
+
+/* Ajustes para una separación más natural entre secciones */
+#app-showcase {
+  padding-bottom: 3rem;
+  border-bottom: none; /* Eliminamos el borde que era muy obvio */
+}
+
+#gestion-showcase {
+  padding-top: 2rem;
+  border-top: none; /* Eliminamos el borde que era muy obvio */
+  position: relative;
+}
+
+/* Separador sutil entre secciones */
+#gestion-showcase:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.05), rgba(0,0,0,0)); /* Degradado sutil */
+}
+
+/* Eliminamos la clase section-divider que era muy exagerada */
+/* Media queries para ajustar espaciado en dispositivos más pequeños */
+@media (max-width: 768px) {
+  #app-showcase, #gestion-showcase {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
+  
+  #gestion-showcase:before {
+    left: 10%;
+    right: 10%;
   }
 }
 
@@ -430,5 +486,23 @@ footer {
   .isotipo-cta,
   .isotipo-survey {
     height: 70px; /* Ajustado para pantallas muy pequeñas */
+  }
+}
+
+/* Favicon Circular */
+link[rel="icon"],
+link[rel="shortcut icon"],
+link[rel="apple-touch-icon"] {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Solución adicional: Crear un favicon circular con CSS */
+@media screen and (min-width: 0\0) {
+  /* Hack para IE */
+  link[rel="icon"],
+  link[rel="shortcut icon"],
+  link[rel="apple-touch-icon"] {
+    border-radius: 0;
   }
 }

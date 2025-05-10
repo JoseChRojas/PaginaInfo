@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Favicon | +Zaldo</title>
+    
+    <!-- Favicon - Configuración mejorada con soporte para Firefox -->
+    <link rel="icon" type="image/jpeg" href="/assets/img/LOGOSS-08.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="/assets/img/LOGOSS-08.jpg">
+    <!-- Firefox específicamente -->
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/img/LOGOSS-08.jpg">
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/img/LOGOSS-08.jpg">
+    <link rel="apple-touch-icon" href="/assets/img/LOGOSS-08.jpg">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 100px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .icon-test {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #1D426A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">Prueba de Favicon +Zaldo</h1>
+        
+        <div class="alert alert-info">
+            <p>Esta página es para verificar si los favicons se están cargando correctamente.</p>
+            <p>Comprueba la pestaña del navegador para ver si el favicon se muestra.</p>
+            <p><strong>Nota:</strong> Firefox puede necesitar forzar una recarga completa con Ctrl+F5 o borrar la caché.</p>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="icon-test">
+                    <h2>Favicon principal</h2>
+                    <p>Ruta: <code>/assets/img/LOGOSS-08.jpg</code></p>
+                    <p>Estado: <span id="status-favicon" class="badge bg-warning">Verificando...</span></p>
+                    <img id="preview-favicon" src="/assets/img/LOGOSS-08.jpg" alt="Favicon" style="display:none; max-width: 64px; border-radius: 8px;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="icon-test">
+                    <h2>Firefox Test</h2>
+                    <p>Navegador: <span id="browser-info" class="badge bg-info">Verificando...</span></p>
+                    <p>Consejo: <span id="browser-advice"></span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+            <div class="alert alert-primary">
+                <p class="mb-0"><strong>Tip:</strong> Si los favicons no aparecen después de cambiarlos, intenta forzar una recarga completa 
+                   presionando <code>Ctrl+F5</code> o <code>Shift+F5</code> en tu navegador. Los navegadores suelen guardar en caché los favicons.</p>
+            </div>
+            <button id="reload-btn" class="btn btn-danger mt-2 mb-3">Forzar recarga de favicon</button><br>
+            <a href="/" class="btn btn-primary mt-2">Volver a Inicio</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Comprobar el navegador
+            let browserInfo = document.getElementById('browser-info');
+            let browserAdvice = document.getElementById('browser-advice');
+            
+            function detectBrowser() {
+                if (navigator.userAgent.indexOf("Firefox") > -1) {
+                    browserInfo.textContent = "Mozilla Firefox";
+                    browserInfo.className = "badge bg-danger";
+                    browserAdvice.innerHTML = "Firefox puede requerir pasos adicionales:<br>1. Cierra todas las pestañas de Firefox<br>2. Borra la caché en Configuración > Privacidad<br>3. Reinicia Firefox";
+                } else if (navigator.userAgent.indexOf("Edg") > -1) {
+                    browserInfo.textContent = "Microsoft Edge";
+                    browserInfo.className = "badge bg-success";
+                    browserAdvice.textContent = "Edge suele mostrar los favicons correctamente tras una recarga.";
+                } else if (navigator.userAgent.indexOf("Chrome") > -1) {
+                    browserInfo.textContent = "Google Chrome";
+                    browserInfo.className = "badge bg-success";
+                    browserAdvice.textContent = "Chrome suele mostrar los favicons correctamente tras una recarga.";
+                } else {
+                    browserInfo.textContent = "Otro navegador";
+                    browserInfo.className = "badge bg-warning";
+                    browserAdvice.textContent = "Puede ser necesario borrar la caché del navegador.";
+                }
+            }
+            
+            detectBrowser();
+            
+            // Verificar el favicon principal
+            checkImage('/assets/img/LOGOSS-08.jpg', 'status-favicon', 'preview-favicon');
+            
+            // Botón para forzar recarga
+            document.getElementById('reload-btn').addEventListener('click', function() {
+                window.location.reload(true);  // true = forzar recarga desde servidor
+            });
+        });
+        
+        function checkImage(url, statusId, previewId) {
+            const img = new Image();
+            const statusElement = document.getElementById(statusId);
+            const previewElement = document.getElementById(previewId);
+            
+            img.onload = function() {
+                statusElement.className = 'badge bg-success';
+                statusElement.textContent = 'Disponible ✓';
+                previewElement.style.display = 'inline';
+                console.log(`Imagen cargada correctamente: ${url}`);
+            };
+            
+            img.onerror = function() {
+                statusElement.className = 'badge bg-danger';
+                statusElement.textContent = 'No encontrado ✗';
+                console.error(`Error al cargar la imagen: ${url}`);
+            };
+            
+            // Agregar un parámetro de consulta aleatorio para prevenir la caché
+            img.src = url + '?nocache=' + new Date().getTime();
+        }
+    </script>
+</body>
+</html>

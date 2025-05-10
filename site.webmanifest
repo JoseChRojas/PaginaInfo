@@ -1,0 +1,20 @@
+{
+    "name": "+Zaldo",
+    "short_name": "+Zaldo",
+    "icons": [
+        {
+            "src": "/assets/img/LOGOSS-08.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "/assets/img/LOGOSS-08.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ],
+    "theme_color": "#1D426A",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/"
+}

@@ -40,3 +40,32 @@ Options -Indexes
 
 # Configuración página 404
 ErrorDocument 404 /404.html
+
+# Configuración para servir favicons correctamente
+<IfModule mod_mime.c>
+    AddType image/jpeg .jpg .jpeg
+    AddType image/png .png
+    AddType image/x-icon .ico
+    AddType application/manifest+json .webmanifest
+</IfModule>
+
+# Headers para mejorar compatibilidad con navegadores
+<IfModule mod_headers.c>
+    # Permitir que Firefox acceda al favicon
+    <FilesMatch "\.(jpg|jpeg|png|ico)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Cache-Control "max-age=2592000"
+    </FilesMatch>
+    
+    # Ayudar a Firefox a identificar el tipo MIME correcto
+    <Files "LOGOSS-08.jpg">
+        Header set Content-Type "image/jpeg"
+    </Files>
+</IfModule>
+
+# Asegurar que el favicon se sirve correctamente en Firefox
+<IfModule mod_rewrite.c>
+    # Redirigir solicitudes de favicon.ico al archivo JPG
+    RewriteCond %{REQUEST_URI} ^/favicon\.ico$ [NC]
+    RewriteRule ^(.*)$ /assets/img/LOGOSS-08.jpg [L,T=image/jpeg]
+</IfModule>

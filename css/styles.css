@@ -14,104 +14,6 @@
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s ease;
 }
-#card-connection {
-  background: linear-gradient(to bottom, #f5f8fa 0%, #ffffff 100%);
-  padding-top: 80px;
-  padding-bottom: 80px;
-  margin-top: 0;
-}
-
-
-#card-connection {
-  background-color: #f8f9fb;
-}
-
-.card-form {
-  background: white;
-  padding: 2rem;
-  border-radius: 1.25rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 0.5s ease-in-out;
-}
-
-.card-preview {
-  background: linear-gradient(135deg, #1d426a, #2b5d91);
-  color: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  position: relative;
-}
-
-.card-logo img {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  height: 40px;
-}
-
-.card-chip {
-  width: 50px;
-  height: 35px;
-  background: #ddd;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.card-number {
-  font-size: 1.4rem;
-  letter-spacing: 3px;
-  margin-bottom: 1rem;
-}
-
-.card-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-}
-
-.card-info span {
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-
-/* Input styles */
-.card-form .form-control,
-.card-form .form-select {
-  border-radius: 0.6rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-}
-
-
-
-/* Button */
-.card-form .btn {
-  background-color: #1d426a;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 0.6rem;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.card-form .btn:hover {
-  background-color: #15314f;
-  transition: 0.3s;
-}
-
-/* Animation */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 
 /* General Styles */
 body {
@@ -221,85 +123,6 @@ img {
 /* Para asegurar que las imágenes con fondo transparente se vean correctamente */
 .hero img, .cta img {
   background-color: transparent !important;
-}
-
-/* HERO: Contenedor */
-.hero .hero-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4rem 0;
-}
-
-/* HERO: Contenido a la izquierda */
-.hero-content {
-  text-align: center;
-  padding: 1rem 2rem;
-}
-
-.hero-content h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.hero-content p {
-  font-size: 1.1rem;
-  color: #f1f1f1;
-  margin-bottom: 2rem;
-}
-
-.hero-buttons .btn {
-  margin: 0.5rem;
-}
-
-/* HERO: Imagen Mockup */
-.demo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  width: 100%;
-  height: auto;
-}
-
-.app-screenshot {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  transition: transform 0.8s ease;
-}
-
-.app-screenshot:hover {
-  transform: scale(1.03);
-}
-
-/* RESPONSIVE: Mobile */
-@media (max-width: 768px) {
-  .hero-row {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
-  .app-screenshot {
-    max-width: 80%;
-    transform: none;
-  }
-
-  .app-screenshot:hover {
-    transform: none;
-  }
 }
 
 /* Navigation */
@@ -599,14 +422,11 @@ footer {
   border-bottom: none; /* Eliminamos el borde que era muy obvio */
 }
 
-#benefits,
-#app-showcase,
 #gestion-showcase {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  padding-top: 2rem;
+  border-top: none; /* Eliminamos el borde que era muy obvio */
+  position: relative;
 }
-
-
 
 /* Separador sutil entre secciones */
 #gestion-showcase:before {

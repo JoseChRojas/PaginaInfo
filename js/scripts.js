@@ -115,4 +115,24 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  // Mejorar alineación de icon-circle en móviles
+  if (window.innerWidth <= 768) {
+    // Asegurar que todos los elementos icon-circle están correctamente alineados
+    document.querySelectorAll('.app-showcase-content .d-flex').forEach(item => {
+      // Añadir clase para identificar fácilmente en modo móvil
+      item.classList.add('mobile-flex-item');
+      
+      // Verificar la altura de los elementos y ajustar si es necesario
+      const iconCircle = item.querySelector('.icon-circle');
+      const textContent = item.querySelector('.ms-3');
+      
+      if (iconCircle && textContent) {
+        // Si el texto es muy alto, ajustar la posición del icono
+        if (textContent.offsetHeight > 65) {
+          iconCircle.style.top = '8px';
+        }
+      }
+    });
+  }
 });

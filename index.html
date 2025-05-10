@@ -437,10 +437,16 @@
                 <div class="col-lg-4">
                     <h5>Mantente informado</h5>
                     <p class="text-muted mb-3">Suscríbete para recibir actualizaciones sobre nuestro lanzamiento y consejos financieros.</p>
-                    <!-- Formulario simplificado sin funcionalidades de envío -->
-                    <form id="subscribeForm" class="d-flex">
+                    <!-- Formulario con FormSubmit para envío de correos -->
+                    <form id="subscribeForm" action="https://formsubmit.co/contacto@maszaldo.cl" method="POST" class="d-flex">
                         <input type="email" name="email" class="form-control me-2" placeholder="Tu email" required>
                         <button type="submit" class="btn btn-primary">Enviar</button>
+                        
+                        <!-- Campos ocultos de FormSubmit -->
+                        <input type="hidden" name="_subject" value="Nueva suscripción a +Zaldo">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://www.maszaldo.cl/gracias.html">
                     </form>
                     <div id="subscribeMessage" class="mt-2 small"></div>
                 </div>
@@ -493,39 +499,37 @@
     <!-- SEO Helper -->
     <script src="/js/seo-helper.js"></script>
     
-    <!-- Script simplificado para formulario de suscripción -->
+    <!-- Script para manejar el formulario de suscripción con respaldo local -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const subscribeForm = document.getElementById('subscribeForm');
             const subscribeMessage = document.getElementById('subscribeMessage');
             
             if (subscribeForm) {
-                subscribeForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
+                // Guardar una copia en localStorage antes de enviar
+                subscribeForm.addEventListener('submit', function() {
                     const email = this.querySelector('input[name="email"]').value;
                     
-                    if (!email || !email.includes('@') || !email.includes('.')) {
-                        subscribeMessage.innerHTML = '<span class="text-danger">Por favor ingresa un email válido.</span>';
-                        return;
+                    // Solo si hay un email válido
+                    if (email && email.includes('@') && email.includes('.')) {
+                        // Guardar en localStorage como respaldo
+                        try {
+                            let subscribers = JSON.parse(localStorage.getItem('subscribers') || '[]');
+                            subscribers.push({
+                                email: email,
+                                date: new Date().toISOString()
+                            });
+                            localStorage.setItem('subscribers', JSON.stringify(subscribers));
+                            
+                            // Mostrar mensaje antes de que la página se recargue
+                            subscribeMessage.innerHTML = '<span class="text-success">¡Enviando suscripción!</span>';
+                        } catch (e) {
+                            console.error('Error guardando en localStorage', e);
+                        }
                     }
                     
-                    // Guardar en localStorage solamente para referencia futura
-                    try {
-                        let subscribers = JSON.parse(localStorage.getItem('subscribers') || '[]');
-                        subscribers.push({
-                            email: email,
-                            date: new Date().toISOString()
-                        });
-                        localStorage.setItem('subscribers', JSON.stringify(subscribers));
-                        
-                        // Mostrar mensaje de éxito
-                        subscribeMessage.innerHTML = '<span class="text-success">¡Gracias por suscribirte!</span>';
-                        subscribeForm.reset();
-                    } catch (e) {
-                        console.error('Error guardando en localStorage', e);
-                        subscribeMessage.innerHTML = '<span class="text-danger">Ha ocurrido un error. Intenta nuevamente.</span>';
-                    }
+                    // FormSubmit se encargará de enviar el formulario
+                    // No hacemos preventDefault() para permitir que el formulario se envíe
                 });
             }
         });

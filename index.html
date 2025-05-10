@@ -72,11 +72,13 @@
                     <li class="nav-item"><a class="nav-link" href="#features">Características</a></li>
                     <li class="nav-item"><a class="nav-link" href="#benefits">Beneficios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">Preguntas</a></li>
-                    <li class="nav-item"><a class="nav-link cta-small" href="survey.html">¡Únete a la Beta!</a></li>
+                    <li class="nav-item"><a class="nav-link cta-small" href="survey.html">¡Danos tu feedback!</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
+
 
     <!-- Header/Hero Section -->
     <header class="hero" id="page-top">
@@ -141,8 +143,18 @@
                 </div>
             </div>
         </div>
-        <!-- Separador visual para móviles -->
-        <div class="section-divider-mobile d-md-none"></div>
+    </section>
+
+    <!-- Nueva sección de CTA debajo de "Características Principales" -->
+    <section id="cta-email" class="cta-highlight text-center py-5">
+        <div class="container">
+            <h2 class="mb-3">¡Únete a nuestra comunidad!</h2>
+            <p class="mb-4">Recibe actualizaciones exclusivas sobre +Zaldo.</p>
+            <form id="email-form" class="d-flex justify-content-center">
+                <input type="email" class="form-control me-2" placeholder="Ingresa tu correo electrónico" required>
+                <button type="submit" class="btn btn-primary btn-xl">Mantente informado</button>
+            </form>
+        </div>
     </section>
 
     <!-- App Showcase -->
@@ -229,42 +241,54 @@
               <span class="card-expiry">MM/AA</span>
             </div>
           </div>
-         <form class="mt-4">
-  <div class="mb-3">
-    <label class="form-label">Nombre del titular</label>
-    <input type="text" class="form-control" placeholder="Nombre completo">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Número de tarjeta</label>
-    <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
-  </div>
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">Fecha expiración</label>
-      <input type="text" class="form-control" placeholder="MM/AA" maxlength="5">
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="form-label">CVC</label>
-      <input type="text" class="form-control" placeholder="123" maxlength="3">
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Banco</label>
-    <select class="form-select">
-      <option>Banco de Chile</option>
-      <option>BancoEstado</option>
-      <option>Santander</option>
-      <option>BCI</option>
-      <option>Scotiabank</option>
-      <option>Banco Itaú</option>
-      <option>Banco Falabella</option>
-    </select>
-  </div>
-  <button id="simulate-btn" class="btn btn-primary w-100" type="button">Simular Conexión</button>
-
-  <!-- Este div FALTABA -->
-  <div id="connection-message" class="mt-3 text-center" style="display: none;"></div>
-</form>
+          <!-- Mensaje claro al inicio -->
+          <p class="text-danger text-center mb-4 mt-3">
+            Por favor, utiliza los datos ficticios que aparecen debajo de cada campo. No ingreses información personal real.
+          </p>
+          <form class="mt-4">
+            <div class="mb-3">
+              <label class="form-label">Nombre del titular</label>
+              <input type="text" class="form-control" placeholder="Josh Martin Sepulveda">
+              <small class="text-muted">Pon: Josh Martin Sepulveda</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Número de tarjeta</label>
+              <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+              <small class="text-muted">Pon: 1234 5678 9012 3456</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">RUT</label>
+              <input type="text" class="form-control" placeholder="12.345.678-5">
+              <small class="text-muted">Pon: 12.345.678-5</small>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Fecha expiración</label>
+                <input type="text" class="form-control" placeholder="12/25" maxlength="5">
+                <small class="text-muted">Pon: 12/25</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">CVC</label>
+                <input type="text" class="form-control" placeholder="123" maxlength="3">
+                <small class="text-muted">Pon: 123</small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Banco</label>
+              <select class="form-select">
+                <option>Banco de Chile</option>
+                <option>BancoEstado</option>
+                <option>Santander</option>
+                <option>BCI</option>
+                <option>Scotiabank</option>
+                <option>Banco Itaú</option>
+                <option>Banco Falabella</option>
+              </select>
+              <small class="text-muted">Ejemplo: Banco de Chile</small>
+            </div>
+            <button id="simulate-btn" class="btn btn-primary w-100" type="button">Simular Conexión</button>
+            <div id="connection-message" class="mt-3 text-center" style="display: none;"></div>
+          </form>
         </div>
       </div>
     </div>

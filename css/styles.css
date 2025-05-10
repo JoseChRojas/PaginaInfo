@@ -539,6 +539,67 @@ img {
   background-color: var(--primary-color);
 }
 
+/* Estilos para el CTA */
+.cta-highlight {
+    background-color: #f8f9fa; /* Fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.cta-highlight h2 {
+    color: #1D426A; /* Azul principal */
+    font-weight: bold;
+}
+
+.cta-highlight p {
+    color: #6c757d; /* Gris suave */
+}
+
+.cta-highlight input {
+    max-width: 300px;
+}
+
+.cta-highlight button {
+    background-color: #1D426A; /* Azul oscuro como "¡Únete a la Beta!" */
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-highlight button:hover {
+    background-color: #163354; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Estilos para destacar el CTA */
+.cta-highlight {
+  background-color: #f8f9fa; /* Fondo claro */
+  border: 2px solid #007bff; /* Borde azul */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.cta-highlight h2 {
+  color: #007bff; /* Azul principal */
+  font-weight: bold;
+}
+
+.cta-highlight p {
+  color: #6c757d; /* Gris suave */
+}
+
+.cta-highlight input {
+  max-width: 300px;
+}
+
+.cta-highlight button {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
 /* Footer */
 footer {
   padding-top: 3rem;

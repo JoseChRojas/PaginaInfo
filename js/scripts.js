@@ -1,16 +1,10 @@
-/**
- * +Zaldo - Main Scripts
- * Mejoras de UX/UI para dispositivos móviles
- */
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // Ajustar el navbar al hacer scroll
+  // Navbar scroll effect
   const mainNav = document.getElementById('mainNav');
-  
   if (mainNav) {
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       if (window.scrollY > 50) {
         mainNav.classList.add('navbar-scrolled');
       } else {
@@ -19,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Cerrar el menú móvil al hacer clic en un enlace
-  document.querySelectorAll('.navbar-nav .nav-link').forEach(function(link) {
-    link.addEventListener('click', function() {
+  // Cerrar menú móvil al hacer clic
+  document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
       if (window.innerWidth < 992) {
         const navbarToggler = document.querySelector('.navbar-toggler');
         if (!navbarToggler.classList.contains('collapsed')) {
@@ -31,47 +25,93 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Scroll suave para enlaces internos
-  document.querySelectorAll('a.js-scroll-trigger[href*="#"]:not([href="#"])').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
+  // Scroll suave
+  document.querySelectorAll('a.js-scroll-trigger[href^="#"]:not([href="#"])').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      
       const targetID = this.getAttribute('href');
-      const targetElement = document.querySelector(targetID);
-      
-      if (targetElement) {
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
+      const target = document.querySelector(targetID);
+      if (target) {
+        const offset = 80;
+        const position = target.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({
-          top: offsetPosition,
+          top: position,
           behavior: 'smooth'
         });
       }
     });
   });
 
-  // Mejorar interacción con imágenes en móvil
+  // Simulador de tarjeta
+  const nameInput = document.querySelector('input[placeholder="Nombre completo"]');
+  const cardInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+  const expInput = document.querySelector('input[placeholder="MM/AA"]');
+
+  const previewNumber = document.querySelector('.card-number');
+  const previewName = document.querySelector('.card-holder');
+  const previewExp = document.querySelector('.card-expiry');
+
+  if (nameInput && previewName) {
+    nameInput.addEventListener('input', (e) => {
+      previewName.textContent = e.target.value || 'Tu nombre';
+    });
+  }
+
+  if (cardInput && previewNumber) {
+    cardInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/\D/g, '').slice(0, 16);
+      let formatted = val.replace(/(.{4})/g, '$1 ').trim();
+      e.target.value = formatted;
+      previewNumber.textContent = formatted.padEnd(19, '•');
+    });
+  }
+
+  if (expInput && previewExp) {
+    expInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+      let month = val.slice(0, 2);
+      if (month.length === 1 && parseInt(month) > 1) month = '0' + month;
+      if (month.length === 2 && (parseInt(month) < 1 || parseInt(month) > 12)) month = '12';
+      let year = val.slice(2, 4);
+      let result = year.length > 0 ? `${month}/${year}` : month;
+      e.target.value = result;
+      previewExp.textContent = result || 'MM/AA';
+    });
+  }
+
+  // Simulación de conexión
+  const simulateBtn = document.getElementById('simulate-btn');
+  const messageBox = document.getElementById('connection-message');
+  if (simulateBtn && messageBox) {
+    simulateBtn.addEventListener('click', () => {
+      simulateBtn.disabled = true;
+      simulateBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Conectando...`;
+
+      setTimeout(() => {
+        simulateBtn.innerHTML = `Simular Conexión`;
+        simulateBtn.disabled = false;
+
+        messageBox.innerHTML = `
+          <div class="alert alert-success animate__animated animate__fadeInDown" role="alert">
+            ✅ “Así de fácil es conectar tus cuentas bancarias con +Zaldo” <strong>+Zaldo</strong>.
+          </div>
+        `;
+        messageBox.style.display = 'block';
+      }, 2000);
+    });
+  }
+
+  // Efecto "hover" en móviles al tocar imágenes
   if (window.innerWidth < 768) {
-    const appScreenshots = document.querySelectorAll('.app-screenshot, .app-showcase-image');
-    
-    appScreenshots.forEach(function(image) {
-      image.addEventListener('click', function() {
-        // Simular el efecto hover al tocar en dispositivos móviles
-        if (this.classList.contains('app-screenshot')) {
-          this.style.transform = 'perspective(600px) rotateY(0)';
-          
-          setTimeout(() => {
-            this.style.transform = '';
-          }, 2000);
-        } else {
-          this.style.transform = 'translateY(-10px)';
-          
-          setTimeout(() => {
-            this.style.transform = '';
-          }, 2000);
-        }
+    document.querySelectorAll('.app-screenshot, .app-showcase-image').forEach(image => {
+      image.addEventListener('click', function () {
+        this.style.transform = this.classList.contains('app-screenshot')
+          ? 'perspective(600px) rotateY(0)'
+          : 'translateY(-10px)';
+
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 2000);
       });
     });
   }

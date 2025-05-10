@@ -69,3 +69,13 @@ ErrorDocument 404 /404.html
     RewriteCond %{REQUEST_URI} ^/favicon\.ico$ [NC]
     RewriteRule ^(.*)$ /assets/img/LOGOSS-08.jpg [L,T=image/jpeg]
 </IfModule>
+
+# Habilitar PHP para procesar formularios
+<IfModule mod_php7.c>
+    php_flag display_errors off
+    php_value post_max_size 8M
+    php_value upload_max_filesize 2M
+    php_value max_execution_time 30
+    php_value max_input_time 60
+    php_value memory_limit 128M
+</IfModule>

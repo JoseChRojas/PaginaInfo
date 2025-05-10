@@ -437,10 +437,11 @@
                 <div class="col-lg-4">
                     <h5>Mantente informado</h5>
                     <p class="text-muted mb-3">Suscríbete para recibir actualizaciones sobre nuestro lanzamiento y consejos financieros.</p>
-                    <form class="d-flex">
-                        <input type="email" class="form-control me-2" placeholder="Tu email">
+                    <form id="subscribeForm" action="/subscribe.php" method="post" class="d-flex">
+                        <input type="email" name="email" class="form-control me-2" placeholder="Tu email" required>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
+                    <div id="subscribeMessage" class="mt-2 small"></div>
                 </div>
             </div>
             <hr class="my-4">
@@ -490,6 +491,76 @@
     <script src="/js/scripts.js"></script>
     <!-- SEO Helper -->
     <script src="/js/seo-helper.js"></script>
-
+    
+    <!-- EmailJS para envío de correos -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Script para manejo de suscripción -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar EmailJS - Necesitas registrarte en https://www.emailjs.com/
+            // y reemplazar "user_abcdefg" con tu ID de usuario
+            emailjs.init("user_abcdefg");
+            
+            const subscribeForm = document.getElementById('subscribeForm');
+            const subscribeMessage = document.getElementById('subscribeMessage');
+            
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = this.querySelector('input[name="email"]').value;
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    
+                    if (!email || !email.includes('@') || !email.includes('.')) {
+                        subscribeMessage.innerHTML = '<span class="text-danger">Por favor ingresa un email válido.</span>';
+                        return;
+                    }
+                    
+                    // Cambiar estado de botón
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+                    
+                    // Preparar los datos para enviar
+                    const templateParams = {
+                        to_email: 'contacto@maszaldo.cl',
+                        from_name: 'Sistema de Suscripciones +Zaldo',
+                        message: 'Nueva suscripción: ' + email,
+                        reply_to: email,
+                        subscriber_email: email
+                    };
+                    
+                    // Enviar el correo usando EmailJS
+                    // service_id y template_id debes crearlos en tu cuenta de EmailJS
+                    emailjs.send('service_id', 'template_id', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            subscribeMessage.innerHTML = '<span class="text-success">¡Gracias por suscribirte!</span>';
+                            subscribeForm.reset();
+                            
+                            // También podemos guardar en localStorage para no perder datos
+                            try {
+                                let subscribers = JSON.parse(localStorage.getItem('subscribers') || '[]');
+                                subscribers.push({
+                                    email: email,
+                                    date: new Date().toISOString()
+                                });
+                                localStorage.setItem('subscribers', JSON.stringify(subscribers));
+                            } catch (e) {
+                                console.error('Error guardando en localStorage', e);
+                            }
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            subscribeMessage.innerHTML = '<span class="text-danger">Error al enviar. Por favor intenta nuevamente.</span>';
+                        })
+                        .finally(() => {
+                            // Restaurar botón
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = 'Enviar';
+                        });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -539,28 +539,31 @@ img {
   background-color: var(--primary-color);
 }
 
-/* Estilos para el CTA */
+/* Estilos para el CTA - Actualizado con los colores de +Zaldo */
 .cta-highlight {
     background-color: #f8f9fa; /* Fondo claro */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 2px solid var(--primary-color); /* Borde con el color primario de +Zaldo */
 }
 
 .cta-highlight h2 {
-    color: #1D426A; /* Azul principal */
+    color: var(--primary-color); /* Color primario de +Zaldo */
     font-weight: bold;
 }
 
 .cta-highlight p {
-    color: #6c757d; /* Gris suave */
+    color: var(--dark-gray); /* Gris oscuro para mejor legibilidad */
 }
 
 .cta-highlight input {
     max-width: 300px;
+    border: 1px solid var(--primary-light); /* Borde con color primario más claro */
+    border-radius: 0.25rem;
 }
 
 .cta-highlight button {
-    background-color: #1D426A; /* Azul oscuro como "¡Únete a la Beta!" */
+    background-color: var(--primary-color); /* Color primario de +Zaldo */
     color: #fff;
     font-weight: bold;
     border: none;
@@ -570,34 +573,25 @@ img {
 }
 
 .cta-highlight button:hover {
-    background-color: #163354; /* Azul más oscuro al pasar el mouse */
+    background-color: var(--primary-dark); /* Versión más oscura del color primario */
 }
 
-/* Estilos para destacar el CTA */
-.cta-highlight {
-  background-color: #f8f9fa; /* Fondo claro */
-  border: 2px solid #007bff; /* Borde azul */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.cta-highlight h2 {
-  color: #007bff; /* Azul principal */
-  font-weight: bold;
-}
-
-.cta-highlight p {
-  color: #6c757d; /* Gris suave */
-}
-
-.cta-highlight input {
-  max-width: 300px;
-}
-
-.cta-highlight button {
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
+/* Media queries para hacer responsivo el formulario en el CTA */
+@media (max-width: 576px) {
+    .cta-highlight form {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-highlight input {
+        max-width: 100%;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .cta-highlight button {
+        width: 100%;
+    }
 }
 
 /* Footer */

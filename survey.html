@@ -26,6 +26,31 @@
     <meta property="twitter:description" content="Sé parte de los primeros usuarios en probar +Zaldo, la aplicación de gestión financiera personal. Participa en nuestro programa beta.">
     <meta property="twitter:image" content="https://www.maszaldo.cl/assets/img/social-preview.jpg">
     
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GT-KT5HKTTB');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z3SL0E5GPJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z3SL0E5GPJ');
+        
+        // Configuración de eventos personalizados para rastrear interacciones
+        function trackEvent(category, action, label) {
+            gtag('event', action, {
+                'event_category': category,
+                'event_label': label
+            });
+        }
+    </script>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
@@ -48,6 +73,11 @@
     
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GT-KT5HKTTB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
@@ -84,13 +114,13 @@
                         <div class="card-body p-0">
                             <!-- Google Forms iframe con contenedor de proporciones fijas -->
                             <div class="iframe-container">
-                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdne9De7Klvu4L9Pls1REmchnuTBhRHOy-RQnUy94m8rFXYag/viewform?usp=dialog&embedded=true" frameborder="0" marginheight="0" marginwidth="0" scrolling="yes" allowfullscreen>Cargando…</iframe>
+                                <iframe id="surveyIframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdne9De7Klvu4L9Pls1REmchnuTBhRHOy-RQnUy94m8rFXYag/viewform?usp=dialog&embedded=true" frameborder="0" marginheight="0" marginwidth="0" scrolling="yes" allowfullscreen>Cargando…</iframe>
                             </div>
                         </div>
                     </div>
                     <!-- Alternativa siempre visible con enlace directo -->
                     <div class="survey-alt-link mb-4">
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdne9De7Klvu4L9Pls1REmchnuTBhRHOy-RQnUy94m8rFXYag/viewform" target="_blank" class="btn btn-primary">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdne9De7Klvu4L9Pls1REmchnuTBhRHOy-RQnUy94m8rFXYag/viewform" target="_blank" class="btn btn-primary" id="external-form-btn">
                             <i class="fas fa-external-link-alt me-2"></i>Abrir formulario en nueva ventana
                         </a>
                         <p class="text-muted small mt-2">Recomendado para mejor visualización</p>
@@ -135,31 +165,112 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Survey Helper Script -->
+    <!-- Survey Analytics Helper Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Detectar problemas de visualización del iframe
-            const surveyIframe = document.querySelector('.survey-card iframe');
+            // Variables para rastreo
+            let formInteractionRecorded = false;
+            let pageViewTracked = false;
+            let startTime = Date.now();
             
-            // Función para ajustar altura del iframe automáticamente
-            function resizeIframe() {
-                try {
-                    // Intentar acceder al contenido del iframe (solo funciona si mismo origen)
-                    // En producción esto probablemente fallará por políticas de seguridad
-                    const iframeHeight = surveyIframe.contentWindow.document.body.scrollHeight;
-                    if (iframeHeight > 500) {
-                        surveyIframe.style.height = iframeHeight + 'px';
-                    }
-                } catch (e) {
-                    console.log('No se pudo ajustar el iframe automáticamente');
+            // 1. Registrar vista de página
+            gtag('event', 'page_view', {
+                'page_title': 'Formulario Beta +Zaldo',
+                'page_location': window.location.href
+            });
+            pageViewTracked = true;
+            
+            // 2. Rastrear cuando carga el iframe del formulario
+            const surveyIframe = document.getElementById('surveyIframe');
+            if (surveyIframe) {
+                surveyIframe.addEventListener('load', function() {
+                    trackEvent('Form', 'form_load', 'Survey Frame Loaded');
+                    
+                    // Después de cargar, añadir listener para clics dentro del iframe
+                    detectIframeInteraction();
+                });
+            }
+            
+            // 3. Rastrear clics en el botón de formulario externo
+            const externalFormBtn = document.getElementById('external-form-btn');
+            if (externalFormBtn) {
+                externalFormBtn.addEventListener('click', function() {
+                    trackEvent('Form', 'external_form_open', 'External Form Button Click');
+                });
+            }
+            
+            // 4. Intentar detectar interacción con el iframe
+            function detectIframeInteraction() {
+                const iframeContainer = document.querySelector('.iframe-container');
+                if (iframeContainer) {
+                    iframeContainer.addEventListener('click', function() {
+                        if (!formInteractionRecorded) {
+                            formInteractionRecorded = true;
+                            trackEvent('Form', 'form_interaction', 'User Interacted With Form');
+                        }
+                    });
                 }
             }
             
-            // Intentar ajustar cuando el iframe carga
-            surveyIframe.addEventListener('load', resizeIframe);
+            // 5. Rastrear tiempo en la página cuando el usuario sale
+            window.addEventListener('beforeunload', function() {
+                const timeSpent = Math.round((Date.now() - startTime) / 1000);
+                if (timeSpent > 5) { // Solo registrar si pasaron más de 5 segundos
+                    trackEvent('Engagement', 'time_on_survey', 'Time On Survey Page', timeSpent);
+                }
+            });
             
-            // Intentar periódicamente (puede fallar por restricciones de seguridad)
-            setInterval(resizeIframe, 2000);
+            // 6. Monitorear mensajes del iframe (limitado por políticas de seguridad)
+            window.addEventListener('message', function(event) {
+                // Verificar si es un mensaje del iframe de Google Forms
+                if (event.origin.includes('google.com')) {
+                    try {
+                        let data = event.data;
+                        if (typeof data === 'string' && data.includes('submitted')) {
+                            trackEvent('Form', 'form_submit', 'Form Submitted Successfully');
+                        }
+                    } catch (error) {
+                        console.error('Error procesando mensaje:', error);
+                    }
+                }
+            });
+            
+            // 7. Rastrear scroll en la página
+            let scrollDepthTracked = {
+                '25': false,
+                '50': false,
+                '75': false,
+                '100': false
+            };
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercentage = Math.round((scrollTop / totalHeight) * 100);
+                
+                // Registrar profundidad de scroll en intervalos del 25%
+                if (scrollPercentage >= 25 && !scrollDepthTracked['25']) {
+                    trackEvent('Scroll', 'scroll_depth_25', 'Scroll Depth 25%');
+                    scrollDepthTracked['25'] = true;
+                }
+                if (scrollPercentage >= 50 && !scrollDepthTracked['50']) {
+                    trackEvent('Scroll', 'scroll_depth_50', 'Scroll Depth 50%');
+                    scrollDepthTracked['50'] = true;
+                }
+                if (scrollPercentage >= 75 && !scrollDepthTracked['75']) {
+                    trackEvent('Scroll', 'scroll_depth_75', 'Scroll Depth 75%');
+                    scrollDepthTracked['75'] = true;
+                }
+                if (scrollPercentage >= 99 && !scrollDepthTracked['100']) {
+                    trackEvent('Scroll', 'scroll_depth_100', 'Scroll Depth 100%');
+                    scrollDepthTracked['100'] = true;
+                }
+            });
+            
+            // 8. Detectar errores de carga del iframe
+            surveyIframe.addEventListener('error', function() {
+                trackEvent('Error', 'iframe_error', 'Survey Frame Failed To Load');
+            });
         });
     </script>
 </body>
